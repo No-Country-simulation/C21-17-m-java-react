@@ -1,0 +1,16 @@
+server:
+  port: 8020
+
+spring:
+  application:
+    name: msvc-security
+  config:
+    import: optional:configserver:http://localhost:8888
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+

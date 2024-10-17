@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @Entity
@@ -18,9 +16,6 @@ public class Role {
 
     @Column(unique = true)
     private String name;
-
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
-    private List<User> users;
 
     public Role(String user) {
     }
