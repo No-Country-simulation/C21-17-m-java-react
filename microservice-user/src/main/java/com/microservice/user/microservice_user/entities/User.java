@@ -3,7 +3,6 @@ package com.microservice.user.microservice_user.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import jakarta.persistence.Id;
 
 @Data // Con la anotacion 'Data' de lombok los getters y setters se encuentran configurados pero ocultos
@@ -33,6 +32,9 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
+
+    @Column(name = "course_id")
+    private Long courseId;
 
     public User() {
         // Asignar un rol por defecto, por ejemplo, "Usuario"

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: msvc-user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/elearning_users_db
+    username: tuUser
+    password: tuPassword
+  jpa:
+    hibernate:
+      ddl-auto: create  # O 'create' seg�n tu caso
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+
