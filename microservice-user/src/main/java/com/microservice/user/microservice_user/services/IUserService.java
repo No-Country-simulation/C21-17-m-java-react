@@ -4,11 +4,9 @@ import com.microservice.user.microservice_user.entities.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface IUserService {
 
     List<User> findAll();
 
     User save(User user);
-
-    List<User> findByCourseId(Long idCourse);
 }

@@ -6,23 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
+
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserRepository repository;
 
+
+
     @Transactional
     public User save(User user) {
         return repository.save(user);
-    }
-
-    @Override
-    public List<User> findByCourseId(Long courseId) {
-        return repository.findAllByCourseId(courseId);
     }
 
     @Transactional(readOnly = true)

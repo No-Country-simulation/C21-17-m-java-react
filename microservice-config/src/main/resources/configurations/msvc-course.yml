@@ -7,8 +7,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/elearning_courses_db
-    username: tuUser
-    password: tuPassword
+    username: root
+    password: 1545492s
   jpa:
     hibernate:
       ddl-auto: create  # O 'create' según tu caso
