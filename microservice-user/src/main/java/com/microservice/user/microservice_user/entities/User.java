@@ -1,5 +1,6 @@
 package com.microservice.user.microservice_user.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -33,8 +34,9 @@ public class User {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
 
-    @Column(name = "course_id")
-    private Long courseId;
+    @JsonManagedReference
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL) // Asegúrate de establecer la relación
+    private UserProfile userProfile;
 
     public User() {
         // Asignar un rol por defecto, por ejemplo, "Usuario"
