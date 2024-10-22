@@ -4,8 +4,7 @@ spring:
     name: msvc-user
   config:
     import: optional:configserver:http://localhost:8888
-  jpa:
-    defer-datasource-initialization: true
+
   sql:
     init:
       mode: always
