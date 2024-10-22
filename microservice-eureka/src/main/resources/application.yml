@@ -1,6 +1,16 @@
+server:
+  port: 8761
+
 spring:
   application:
     name: msvc-eureka
   config:
     import: optional:configserver:http://localhost:8888
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled:  true
+    path: /docs/swagger-ui.Eureka
 

@@ -1,8 +1,8 @@
 package com.microservice.user.microservice_user.services;
 
-import com.microservice.user.microservice_user.entities.UserProfile;
+import com.microservice.user.microservice_user.entities.Profile;
 
 public interface IUserProfileService {
 
-    UserProfile save(UserProfile user, Long userId);
+    Profile save(Profile user, Long userId);
 }

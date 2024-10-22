@@ -1,6 +1,6 @@
 package com.microservice.user.microservice_user.controllers;
 
-import com.microservice.user.microservice_user.entities.UserProfile;
+import com.microservice.user.microservice_user.entities.Profile;
 import com.microservice.user.microservice_user.services.IUserProfileService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,8 @@ public class UserProfileController {
     private IUserProfileService userProfileService;
 
     @PostMapping("/{idUser}")
-    public ResponseEntity<?> create(@Valid @RequestBody UserProfile userProfile, @PathVariable Long idUser) { // Verificar, posee errores
-        UserProfile createdUserProfile = userProfileService.save(userProfile, idUser);
+    public ResponseEntity<?> create(@Valid @RequestBody Profile userProfile, @PathVariable Long idUser) { // Verificar, posee errores
+        Profile createdUserProfile = userProfileService.save(userProfile, idUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUserProfile);
     }
 }

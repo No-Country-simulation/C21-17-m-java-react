@@ -14,7 +14,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotBlank
     @Size(min = 2, max = 80)
@@ -27,19 +27,14 @@ public class User {
     private String password;
 
     @Email(message = "Formato de correo electronico invalido")
-    @Column(unique = true)
     private String email;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
 
-    @JsonManagedReference
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL) // Asegúrate de establecer la relación
-    private UserProfile userProfile;
+    @OneToOne(mappedBy = "user") // Asegúrate de establecer la relación
+    private Profile profile;
 
-    public User() {
-        // Asignar un rol por defecto, por ejemplo, "Usuario"
-        this.role = new Role("USER"); // Asegúrate de que "Usuario" exista en tu base de datos
-    }
+
 }
