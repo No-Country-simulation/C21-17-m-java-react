@@ -1,6 +1,6 @@
 package com.microservice.user.microservice_user.services;
 import com.microservice.user.microservice_user.entities.User;
-import com.microservice.user.microservice_user.entities.UserProfile;
+import com.microservice.user.microservice_user.entities.Profile;
 import com.microservice.user.microservice_user.repositories.UserProfileRepository;
 import com.microservice.user.microservice_user.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -20,7 +20,7 @@ public class UserProfileServiceImpl implements IUserProfileService{
     private UserRepository userRepository;
 
     @Transactional
-    public UserProfile save(UserProfile userProfile, Long userId) {
+    public Profile save(Profile userProfile, Long userId) {
 
         User userWanted = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con el ID: " + userId));
@@ -29,7 +29,7 @@ public class UserProfileServiceImpl implements IUserProfileService{
         userProfile.setUser(userWanted);
 
         // Establece el UserProfile dentro del User
-        userWanted.setUserProfile(userProfile);
+        userWanted.setProfile(userProfile);
 
         try {
             // Guarda el usuario, tambien guardara el perfil debido al CASCADE.ALL)

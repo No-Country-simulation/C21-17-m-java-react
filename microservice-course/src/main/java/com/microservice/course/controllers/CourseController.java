@@ -29,4 +29,11 @@ public class CourseController {
     public ResponseEntity<?> findStudentsByIdCourse(@PathVariable Long courseId){
         return ResponseEntity.ok(courseService.findUserByCourseId(courseId));
     }
+
+
+    @DeleteMapping("/{id}")//ENDPOINT para eliminar cursos
+    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
+        courseService.deleteCourse(id);
+        return ResponseEntity.noContent().build();
+}
 }

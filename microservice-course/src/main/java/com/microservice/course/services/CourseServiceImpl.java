@@ -46,4 +46,9 @@ public class CourseServiceImpl implements ICourseService {
                 .userDTOList(userDTOList)
                 .build();
     }
+
+    @Override
+    public void deleteCourse(Long id) {
+
+    }
 }
