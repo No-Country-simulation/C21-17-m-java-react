@@ -11,5 +11,5 @@ import java.util.List;
 public interface UserClient {
 
     @GetMapping("/api/v1/users/search-by-course/{courseId}")
-    List<UserDTO> findAllUserByCourse(@PathVariable Integer courseId);
+    List<UserDTO> findAllUserByCourse(@PathVariable Long courseId);
 }

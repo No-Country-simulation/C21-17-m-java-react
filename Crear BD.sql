@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS elearning_payments_db.user_course (
   user_id INT NOT NULL,
   payment_method VARCHAR(45) NULL,
   amount_paid FLOAT NOT NULL,
-  purchase_date DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  purchase_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (course_id, user_id)  -- Combinación única de course_id y user_id
 ) ENGINE = InnoDB;
 
