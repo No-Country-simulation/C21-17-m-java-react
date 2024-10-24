@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin(originPatterns = "*")
@@ -19,8 +21,14 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping
-    public List<User> users() {
-        return userService.findAll();
+    public ResponseEntity<?> users() {
+
+        return ResponseEntity.ok().body(userService.findAll());
+    }
+
+    @GetMapping("/search-by-course/{courseId}")
+    public ResponseEntity<?> searchByCourse(@PathVariable int courseId) {
+        return ResponseEntity.ok().body(Collections.emptyList());
     }
 
     @PostMapping
