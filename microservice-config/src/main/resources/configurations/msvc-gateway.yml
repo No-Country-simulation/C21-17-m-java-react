@@ -18,7 +18,11 @@ spring:
           uri: http://localhost:9030
           predicates:
             - Path=/api/v1/users/**
+          filters:
+            - AuthenticationFilter  # APLICAMOS LOS FILTROS JWT
         - id: course
           uri: http://localhost:8090
           predicates:
             - Path=/api/v1/course/**
+          filters:
+            - AuthenticationFilter

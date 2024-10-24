@@ -2,11 +2,11 @@ package com.microservice.user.microservice_user.services;
 
 import com.microservice.user.microservice_user.entities.User;
 
-import java.util.List;
-
 public interface IUserService {
 
-    List<User> findAll();
+    String saveUser(User credential);
 
-    User save(User user);
+    String generateToken(String username);
+
+    void validateToken(String token);
 }

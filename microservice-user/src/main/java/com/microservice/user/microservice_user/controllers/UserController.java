@@ -1,11 +1,15 @@
 package com.microservice.user.microservice_user.controllers;
 
 import com.microservice.user.microservice_user.entities.User;
+import com.microservice.user.microservice_user.entities.UserDto;
 import com.microservice.user.microservice_user.services.IUserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -18,7 +22,25 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private IUserService userService;
+    private IUserService service;
+
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @PostMapping("/register")
+    public String addNewUser(@RequestBody User user) {
+        return service.saveUser(user);
+    }
+
+    @PostMapping("/token")
+    public String getToken(@RequestBody UserDto userDto) {
+        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getName(), userDto.getPassword()));
+        if (authenticate.isAuthenticated()) {
+            return service.generateToken(userDto.getName());
+        } else {
+            throw new RuntimeException("invalid access");
+        }
 
     @GetMapping
     public ResponseEntity<?> users() {
@@ -29,11 +51,12 @@ public class UserController {
     @GetMapping("/search-by-course/{courseId}")
     public ResponseEntity<?> searchByCourse(@PathVariable int courseId) {
         return ResponseEntity.ok().body(Collections.emptyList());
+
     }
 
-    @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody User user) { // Verificar, posee errores
-        User createdUser = userService.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    @GetMapping("/validate")
+    public String validateToken(@RequestParam("token") String token) {
+        service.validateToken(token);
+        return "Token is valid";
     }
 }
