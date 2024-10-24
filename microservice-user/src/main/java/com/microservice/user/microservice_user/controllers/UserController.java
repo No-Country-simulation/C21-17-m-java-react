@@ -33,7 +33,7 @@ public class UserController {
         return service.saveUser(user);
     }
 
-    @PostMapping("/token")
+    @PostMapping("/login")
     public String getToken(@RequestBody UserDto userDto) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getName(), userDto.getPassword()));
         if (authenticate.isAuthenticated()) {

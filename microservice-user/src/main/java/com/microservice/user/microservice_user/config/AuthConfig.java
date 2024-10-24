@@ -26,7 +26,7 @@ public class AuthConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/v1/users/register", "/api/v1/users/token", "/api/v1/users/validate").permitAll()
+                        .requestMatchers("/api/v1/users/register", "/api/v1/users/login", "/api/v1/users/validate").permitAll()
                         .anyRequest().authenticated())
                         .csrf(csrf -> csrf.disable()); // Desactivar CSRF
 
