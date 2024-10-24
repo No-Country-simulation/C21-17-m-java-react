@@ -6,4 +6,5 @@ import com.microservice.course.entities.Module;
 
 @Repository
 public interface ModuleRepository extends CrudRepository<Module, Long> {
+
 }

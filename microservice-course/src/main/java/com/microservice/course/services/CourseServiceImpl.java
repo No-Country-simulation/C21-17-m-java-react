@@ -5,6 +5,7 @@ import com.microservice.course.client.UserClient;
 import com.microservice.course.controllers.dto.UserDTO;
 
 import com.microservice.course.entities.Course;
+import com.microservice.course.exceptions.CourseNotFoundException;
 import com.microservice.course.http.response.UserByCourseResponse;
 import com.microservice.course.repositories.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,22 +34,27 @@ public class CourseServiceImpl implements ICourseService {
 
     @Override
     public UserByCourseResponse findUserByCourseId(Long idCourse) {
+        try {
+            // Consultamos el curso
+            Course course = courseRepository.findById(idCourse).orElseThrow();
 
-        // Consultamos el curso
-        Course course = courseRepository.findById(idCourse).orElseThrow();
+            // Obtenemos a todos los usuarios que tengan el curso id, aca se realiza la conexion con el microservicio USER
+            List<UserDTO> userDTOList = userClient.findAllUserByCourse(course.getId());
 
-        // Obtenemos a todos los usuarios que tengan el curso id, aca se realiza la conexion con el microservicio USER
-        List<UserDTO> userDTOList = userClient.findAllUserByCourse(course.getId());
-
-        return UserByCourseResponse.builder()
-                .courseName(course.getTitle())
-                .description(course.getDescription())
-                .userDTOList(userDTOList)
-                .build();
+            return UserByCourseResponse.builder()
+                    .courseName(course.getTitle())
+                    .description(course.getDescription())
+                    .userDTOList(userDTOList)
+                    .build();
+        } catch (Throwable e) {
+            throw new CourseNotFoundException();
+        }
     }
+
 
     @Override
     public void deleteCourse(Long id) {
+        courseRepository.deleteById(id);
 
     }
 }

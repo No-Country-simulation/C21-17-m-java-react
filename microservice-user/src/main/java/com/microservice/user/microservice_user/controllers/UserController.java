@@ -12,6 +12,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin(originPatterns = "*")
@@ -21,6 +23,7 @@ public class UserController {
 
     @Autowired
     private IUserService service;
+
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -38,6 +41,17 @@ public class UserController {
         } else {
             throw new RuntimeException("invalid access");
         }
+
+    @GetMapping
+    public ResponseEntity<?> users() {
+
+        return ResponseEntity.ok().body(userService.findAll());
+    }
+
+    @GetMapping("/search-by-course/{courseId}")
+    public ResponseEntity<?> searchByCourse(@PathVariable int courseId) {
+        return ResponseEntity.ok().body(Collections.emptyList());
+
     }
 
     @GetMapping("/validate")

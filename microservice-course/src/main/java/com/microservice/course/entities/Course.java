@@ -33,4 +33,5 @@ public class Course {
     @Digits(integer = 6, fraction = 2, message = "El precio debe tener como máximo 6 dígitos enteros y 2 decimales")
     private Float price;
 
+
 }
