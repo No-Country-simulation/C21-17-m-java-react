@@ -23,7 +23,6 @@ public class User {
 
     @NotBlank
     @Size(min = 6, max = 80)
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$", message = "Debe contener al menos una letra y un número")
     private String password;
 
     @Email(message = "Formato de correo electronico invalido")
