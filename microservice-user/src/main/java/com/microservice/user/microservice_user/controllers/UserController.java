@@ -3,20 +3,18 @@ package com.microservice.user.microservice_user.controllers;
 import com.microservice.user.microservice_user.entities.User;
 import com.microservice.user.microservice_user.entities.UserDto;
 import com.microservice.user.microservice_user.services.IUserService;
-import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
-@CrossOrigin(originPatterns = "*")
+
+
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
@@ -27,6 +25,8 @@ public class UserController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("/register")
     public String addNewUser(@RequestBody User user) {
@@ -41,11 +41,6 @@ public class UserController {
         } else {
             throw new RuntimeException("invalid access");
         }
-
-    @GetMapping
-    public ResponseEntity<?> users() {
-
-        return ResponseEntity.ok().body(userService.findAll());
     }
 
     @GetMapping("/search-by-course/{courseId}")

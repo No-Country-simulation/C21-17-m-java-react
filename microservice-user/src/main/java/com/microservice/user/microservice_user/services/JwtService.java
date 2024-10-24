@@ -1,6 +1,8 @@
 package com.microservice.user.microservice_user.services;
 
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -23,12 +25,7 @@ public class JwtService {
 
 
     public void validateToken(final String token) {
-        try {
             Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token);
-        } catch (Exception e) {
-            // Manejar excepción de token inválido
-            throw new IllegalArgumentException("Token inválido o expirado.");
-        }
     }
 
 

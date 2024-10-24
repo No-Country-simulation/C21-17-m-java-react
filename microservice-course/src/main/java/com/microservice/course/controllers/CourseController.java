@@ -19,7 +19,8 @@ public class CourseController {
 
     @Autowired
     private ICourseService courseService;
-     private static Logger logger = LoggerFactory.getLogger(CourseController.class);
+
+    private static Logger logger = LoggerFactory.getLogger(CourseController.class);
 
     @GetMapping()
     public ResponseEntity<?> findAll(){
