@@ -5,7 +5,7 @@ spring:
   application:
     name: msvc-eureka
   config:
-    import: optional:configserver:http://localhost:8888
+    import: optional:configserver:http://http://ec2-52-91-223-158.compute-1.amazonaws.com:8888
 
 springdoc:
   api-docs:

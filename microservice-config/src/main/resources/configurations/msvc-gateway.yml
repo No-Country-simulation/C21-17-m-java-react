@@ -1,6 +1,9 @@
 eureka:
   client:
     register-with-eureka: false
+    fetch-registry: true
+    service-url:
+        defaultZone: http://ec2-35-171-28-182.compute-1.amazonaws.com:8761/eureka
 
 server:
   port: 8080
@@ -15,14 +18,20 @@ spring:
           enabled: true
       routes:
         - id: user
-          uri: http://localhost:9030
+          uri: lb://msvc-user
           predicates:
             - Path=/api/v1/users/**
           filters:
             - AuthenticationFilter  # APLICAMOS LOS FILTROS JWT
         - id: course
-          uri: http://localhost:8090
+          uri: lb://msvc-course
           predicates:
             - Path=/api/v1/course/**
+          filters:
+            - AuthenticationFilter
+        - id: payment
+          uri: lb://msvc-payment
+          predicates:
+            - Path=/api/v1/user-courses/**
           filters:
             - AuthenticationFilter

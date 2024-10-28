@@ -31,4 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/main/resources/configurations
+src/main/resources/configurations/msvc-course.yml
+src/main/resources/configurations/msvc-user.yml
+src/main/resources/configurations/msvc-payment.yml
