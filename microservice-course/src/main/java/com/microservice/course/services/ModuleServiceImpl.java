@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -40,11 +41,13 @@ public class ModuleServiceImpl implements IModuleService {
 
     private final Logger logger = LoggerFactory.getLogger(ModuleServiceImpl.class);
 
+    @Transactional(readOnly = true)
     @Override
     public List<Module> findAll() {
         return (List<Module>) moduleRepository.findAll();
     }
 
+    @Transactional
     @Override
     public Map<String, String> save(Module module, Long id) {
         try {
@@ -75,6 +78,7 @@ public class ModuleServiceImpl implements IModuleService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public CourseByModuleResponse findById(Long idModule) {
         Module module = moduleRepository.findById(idModule).orElseThrow();
@@ -92,7 +96,7 @@ public class ModuleServiceImpl implements IModuleService {
                 .build();
     }
 
-
+    @Transactional
     @Override
     public Map<String, String> deleteModule(Long courseId, Long moduleId, Long userId) {
         try {

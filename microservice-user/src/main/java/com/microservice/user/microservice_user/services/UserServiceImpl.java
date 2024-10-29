@@ -17,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -42,6 +43,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Transactional
     @Override
     public Map<String, String> saveUser(User credential) {
         try {
@@ -79,6 +81,7 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Map<String, String> loginUser(UserDto userDto) {
         // Verificar si el usuario existe
@@ -122,7 +125,7 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
-
+    @Transactional(readOnly = true)
     @Override
     public UserDto findUserById(Long id){
         System.out.println(id);
@@ -132,7 +135,7 @@ public class UserServiceImpl implements IUserService {
         return new UserDto(user);
     }
 
-
+    @Transactional(readOnly = true)
     @Override
     public List<User> getAllUsers() {
         return (List<User>) userRepository.findAll(); // Método que devuelve todos los usuarios

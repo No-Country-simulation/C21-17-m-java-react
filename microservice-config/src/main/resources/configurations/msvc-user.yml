@@ -1,12 +1,19 @@
+eureka:
+  instance:
+    hostname: ec2-3-86-80-212.compute-1.amazonaws.com
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
 server:
-  port: port
+  port: 9030
 
 spring:
   application:
     name: msvc-user
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:port/name
+    url: jdbc:mysql://localhost:3306/elearning_users_db
     username: root
     password: password
   jpa:
@@ -14,13 +21,6 @@ spring:
       ddl-auto: update  # O 'create' seg�n tu caso
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
-
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
 
 
 

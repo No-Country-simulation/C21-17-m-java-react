@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-@FeignClient(name = "msvc-user", url = "localhost:9030") // Agregar http://
+@FeignClient(name = "msvc-user") // Agregar http://
 public interface UserClient {
 
     @GetMapping("/api/v1/users/{id}")

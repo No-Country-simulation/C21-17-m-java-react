@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -47,6 +48,7 @@ public class VideoServiceImpl implements IVideoService{
         return (List<Video>) videoRepository.findAll();
     }
 
+    @Transactional
     @Override
     public Map<String, String> save(Video video, Long id) {
         try {
@@ -77,6 +79,7 @@ public class VideoServiceImpl implements IVideoService{
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public ResponseEntity<Video> findById(Long idVideo) {
         Optional<Video> optionalVideo = videoRepository.findById(idVideo);
@@ -85,7 +88,7 @@ public class VideoServiceImpl implements IVideoService{
         return optionalVideo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-
+    @Transactional
     @Override
     public Map<String, String> deleteVideo(Long moduleId, Long videoId, Long userId) {
         try {
