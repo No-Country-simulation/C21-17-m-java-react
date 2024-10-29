@@ -9,17 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@CrossOrigin(originPatterns = "*")
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
@@ -51,20 +47,20 @@ public class UserController {
             return validation(result);
         }
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.loginUser(userDto));
-
     }
 
-    @GetMapping("/search-by-course/{courseId}")
-    public ResponseEntity<?> searchByCourse(@PathVariable int courseId) {
-        return ResponseEntity.ok().body(Collections.emptyList());
 
+//    @GetMapping("/search-by-course/{courseId}")
+//    public ResponseEntity<?> searchByCourse(@PathVariable Long courseId) {
+//        return ResponseEntity.ok().body(service.findByCourseId(courseId));
+//    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> searchUserById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.findUserById(id));
     }
 
-    @GetMapping("/validate")
-    public String validateToken(@RequestParam("token") String token) {
-        service.validateToken(token);
-        return "Token is valid";
-    }
+
 
     // Método de validación para manejar errores de campo
     private ResponseEntity<?> validation(BindingResult result) {

@@ -14,7 +14,7 @@ public class RouteValidator { // Clase para implementacion de rutas posteriormen
             "/users/login",
             "/users/validate",
             "/eureka"
-    ); // ESTAS SON LAS RUTAS QUE SIN AUTENTICACION OSEA SIN TOKEN PODEMOS ACCEDER
+    );
 
     public Predicate<ServerHttpRequest> isSecured =  // Este predicado verifica si la URI de la solicitud no coincide con ninguno de los puntos finales "abiertos" o públicos. Si la URI de la solicitud no contiene ningún URI en openApiEndpoints, entonces se considera que la solicitud está "asegurada" y isSecured devolverá true. Si contiene uno de esos URIs, devolverá false, lo que significa que no es una solicitud asegurada.
             request -> openApiEndpoints

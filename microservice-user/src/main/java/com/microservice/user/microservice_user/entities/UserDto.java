@@ -9,7 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserDto {
 
-    private String name;
-    private String password;
+    public UserDto(User user) {
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.roleId = user.getRole();
+    }
 
+    private String name;
+    private String email;
+    private String password;
+    private Role roleId;
 }

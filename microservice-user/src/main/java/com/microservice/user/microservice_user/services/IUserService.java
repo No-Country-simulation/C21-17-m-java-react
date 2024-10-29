@@ -4,14 +4,15 @@ import com.microservice.user.microservice_user.entities.User;
 import com.microservice.user.microservice_user.entities.UserDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IUserService {
 
-    String saveUser(User credential);
+    Map<?,?>  saveUser(User credential);
 
-    String loginUser(UserDto userDto);
-
-    void validateToken(String token);
+    Map<?,?> loginUser(UserDto userDto);
 
     List<User> getAllUsers();
+
+    UserDto findUserById(Long id);
 }

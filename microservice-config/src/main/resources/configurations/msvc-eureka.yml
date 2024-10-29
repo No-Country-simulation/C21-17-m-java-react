@@ -7,9 +7,9 @@ spring:
 
 eureka:
   instance:
-    hostname: ec2-35-171-28-182.compute-1.amazonaws.com
+    hostname: localhost
   client:
     register-with-eureka: false   # El servidor no necesita registrarse a sí mismo
     fetch-registry: false         # El servidor no obtiene el registro
     server-url:
-      default-zone: http://ec2-35-171-28-182.compute-1.amazonaws.com:${server.port}/eureka
+      defaultZone: http://localhost:8761/eureka

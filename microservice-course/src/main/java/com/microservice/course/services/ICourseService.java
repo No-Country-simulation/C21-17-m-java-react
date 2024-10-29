@@ -1,17 +1,20 @@
 package com.microservice.course.services;
 
 import com.microservice.course.entities.Course;
-import com.microservice.course.http.response.UserByCourseResponse;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public interface ICourseService {
 
     List<Course> findAll();
 
-    Course save(Course course);
+    Map<String, String> save(Course course, Long id);
+//
+//    UserByCourseResponse findUserByCourseId(Long idCourse);
 
-    UserByCourseResponse findUserByCourseId(Long idCourse);
+    Map<String, String> deleteCourse(Long courseId, Long userId);
 
-    void deleteCourse(Long id);
+    Optional<Course> findCourseById(Long id);
 }

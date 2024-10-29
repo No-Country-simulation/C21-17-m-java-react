@@ -3,7 +3,7 @@ eureka:
     register-with-eureka: false
     fetch-registry: true
     service-url:
-        defaultZone: http://ec2-35-171-28-182.compute-1.amazonaws.com:8761/eureka
+        defaultZone: http://localhost:8761/eureka
 
 server:
   port: 8080
