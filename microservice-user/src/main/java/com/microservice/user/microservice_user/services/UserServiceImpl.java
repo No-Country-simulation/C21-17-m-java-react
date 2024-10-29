@@ -18,8 +18,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -42,7 +43,7 @@ public class UserServiceImpl implements IUserService {
     private AuthenticationManager authenticationManager;
 
     @Override
-    public String saveUser(User credential) {
+    public Map<String, String> saveUser(User credential) {
         try {
             // Verificar si el usuario ya existe
             Optional<User> existingUser = userRepository.findByName(credential.getName());
@@ -66,7 +67,12 @@ public class UserServiceImpl implements IUserService {
             // Guardar el usuario en la base de datos
             userRepository.save(credential);
             logger.info("Usuario {} agregado exitosamente.", credential.getName());
-            return "Usuario agregado exitosamente.";
+
+            Map<String, String> messageResponse = new HashMap<>();
+            messageResponse.put("Estado","Usuario agregado exitosamente");
+            messageResponse.put("Horario de registro:", LocalDateTime.now().toString());
+
+            return messageResponse;
         } catch (Exception e) {
             logger.error("Error al registrar el usuario: {}", e.getMessage());
             throw e;
@@ -74,7 +80,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public String loginUser(UserDto userDto) {
+    public Map<String, String> loginUser(UserDto userDto) {
         // Verificar si el usuario existe
         Optional<User> optionalUser = userRepository.findByName(userDto.getName());
         if (optionalUser.isEmpty()) {
@@ -98,8 +104,15 @@ public class UserServiceImpl implements IUserService {
 
             // Generar y devolver el token JWT
             String token = jwtService.generateToken(user.getName());
+
+            Map<String, String> messageResponse = new HashMap<>();
+
+            messageResponse.put("Usuario", user.getName());
+            messageResponse.put("Token", token);
+            messageResponse.put("Inicio de sesion", LocalDateTime.now().toString());
+
             logger.info("Usuario {} inicio sesion exitosamente", user.getName());
-            return token;
+            return messageResponse;
         } catch (RuntimeException e) {
             logger.error("Credenciales incorrectas para el usuario {}: {}", userDto.getName(), e.getMessage());
             throw new UserNotAuthorized("Credenciales incorrectas para el usuario " + userDto.getName() + ".");
@@ -109,9 +122,16 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
-    public void validateToken(String token) {
-        jwtService.validateToken(token);
+
+    @Override
+    public UserDto findUserById(Long id){
+        System.out.println(id);
+      User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("El usuario con el id: "
+              + id + "no existe"));
+
+        return new UserDto(user);
     }
+
 
     @Override
     public List<User> getAllUsers() {

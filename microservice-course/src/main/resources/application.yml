@@ -3,7 +3,7 @@ spring:
   application:
     name: msvc-course
   config:
-    import: optional:configserver:http://ec2-52-91-223-158.compute-1.amazonaws.com:8888
+    import: optional:configserver:http://localhost:8888
 
   sql:
     init:

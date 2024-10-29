@@ -12,4 +12,5 @@ public interface CourseRepository extends CrudRepository<Course, Long> {
     boolean existsByTitle(String title);
 
     Optional<Course> findByTitle(String title);
+
 }
